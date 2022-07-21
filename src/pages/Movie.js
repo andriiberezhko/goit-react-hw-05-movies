@@ -11,5 +11,5 @@ export const Movie = () => {
     fetchMovieById(id).then(setMovie);
     fetchMovieCast(id).then(setCast);
   }, [id]);
-  return <MovieDetails movie={movie} />;
+  return <MovieDetails movie={movie} cast={cast} />;
 };
