@@ -1,9 +1,14 @@
+import { Link } from 'react-router-dom';
+
 export const MoviesList = ({ movies }) => {
-  //   console.log(movies);
   return (
     <ul>
       {movies.map(movie => {
-        return <li key={movie.id}>{movie.title}</li>;
+        return (
+          <li key={movie.id}>
+            <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        );
       })}
     </ul>
   );

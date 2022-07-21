@@ -8,10 +8,27 @@ export const fetchTrend = () => {
       const movies = data.results.map(mov => {
         const movie = {
           id: mov.id,
-          title: mov.original_title,
+          title: mov.title,
         };
         return movie;
       });
       return movies;
+    });
+};
+
+export const fetchMovieById = id => {
+  return fetch(`${BASE_URL}movie/${id}?api_key=${API_KEY}`)
+    .then(r => r.json())
+    .then(data => {
+      data.genres = data.genres.flatMap(({ name }) => name).join(', ');
+      return data;
+    });
+};
+
+export const fetchMovieCast = id => {
+  return fetch(`${BASE_URL}movie/${id}/credits?api_key=${API_KEY}`)
+    .then(r => r.json())
+    .then(data => {
+      return data.cast;
     });
 };
