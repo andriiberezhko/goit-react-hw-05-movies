@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 export const MoviesList = ({ movies }) => {
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location);
   let url = location.pathname !== '/movies' ? '/movies/' : '';
   return (
     <ul>
