@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const CastList = ({ casts }) => {
   return (
     <ul>
@@ -6,11 +8,26 @@ export const CastList = ({ casts }) => {
         return (
           <li key={item.id}>
             <h2>{item.name}</h2>
-            <img src={imgUrl} alt={item.name} />
+            {item.profile_path ? (
+              <img src={imgUrl} alt={item.name} />
+            ) : (
+              <p>{item.name}</p>
+            )}
             <p>Character: {item.character}</p>
           </li>
         );
       })}
     </ul>
   );
+};
+
+CastList.propTypes = {
+  casts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+      profile_path: PropTypes.string.isRequired,
+    })
+  ),
 };

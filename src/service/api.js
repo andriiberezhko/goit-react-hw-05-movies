@@ -20,8 +20,15 @@ export const fetchMovieById = id => {
   return fetch(`${BASE_URL}movie/${id}?api_key=${API_KEY}`)
     .then(r => r.json())
     .then(data => {
-      data.genres = data.genres.flatMap(({ name }) => name).join(', ');
-      return data;
+      const movie = {
+        title: data.title,
+        popularity: data.popularity,
+        overview: data.overview,
+        genres: data.genres.flatMap(({ name }) => name).join(', '),
+        poster_path: data.poster_path,
+      };
+      console.log(movie);
+      return movie;
     });
 };
 
@@ -29,7 +36,16 @@ export const fetchMovieCast = id => {
   return fetch(`${BASE_URL}movie/${id}/credits?api_key=${API_KEY}`)
     .then(r => r.json())
     .then(data => {
-      return data.cast;
+      const actors = data.cast.map(actor => {
+        const actorData = {
+          id: actor.id,
+          name: actor.name,
+          character: actor.character,
+          profile_path: actor.profile_path ? actor.profile_path : '',
+        };
+        return actorData;
+      });
+      return actors;
     });
 };
 
@@ -37,7 +53,15 @@ export const fetchReviews = id => {
   return fetch(`${BASE_URL}movie/${id}/reviews?api_key=${API_KEY}`)
     .then(r => r.json())
     .then(data => {
-      return data.results;
+      const reviews = data.results.map(review => {
+        const reviewData = {
+          id: review.id,
+          author: review.author,
+          content: review.content,
+        };
+        return reviewData;
+      });
+      return reviews;
     });
 };
 
