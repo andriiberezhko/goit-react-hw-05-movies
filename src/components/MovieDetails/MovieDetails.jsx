@@ -4,13 +4,11 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export const MovieDetails = ({
-  movie: { title, poster_path, popularity, overview, genres },
-}) => {
-  console.log({ title });
+export const MovieDetails = ({ movie }) => {
   const location = useLocation();
   const [backPath] = useState(location.state?.from ?? '/');
 
+  const { title, poster_path, popularity, overview, genres } = movie;
   const imgUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
   return (
     <>

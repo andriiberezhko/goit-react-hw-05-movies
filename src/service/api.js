@@ -27,7 +27,6 @@ export const fetchMovieById = id => {
         genres: data.genres.flatMap(({ name }) => name).join(', '),
         poster_path: data.poster_path,
       };
-      console.log(movie);
       return movie;
     });
 };
